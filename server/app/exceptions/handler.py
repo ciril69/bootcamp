@@ -11,6 +11,56 @@ class AppException(Exception):
         self.status_code = status_code
         super().__init__(message)
 
+# Specific Subclasses of AppException
+class ProductNotFound(AppException):
+    def __init__(self, message: str = "The requested product could not be found."):
+        super().__init__(
+            code="PRODUCT_NOT_FOUND",
+            message=message,
+            status_code=status.HTTP_404_NOT_FOUND
+        )
+
+class CategoryNotFound(AppException):
+    def __init__(self, message: str = "The requested category could not be found."):
+        super().__init__(
+            code="CATEGORY_NOT_FOUND",
+            message=message,
+            status_code=status.HTTP_404_NOT_FOUND
+        )
+
+class CartNotFound(AppException):
+    def __init__(self, message: str = "The requested cart could not be found."):
+        super().__init__(
+            code="CART_NOT_FOUND",
+            message=message,
+            status_code=status.HTTP_404_NOT_FOUND
+        )
+
+class OrderNotFound(AppException):
+    def __init__(self, message: str = "The requested order could not be found."):
+        super().__init__(
+            code="ORDER_NOT_FOUND",
+            message=message,
+            status_code=status.HTTP_404_NOT_FOUND
+        )
+
+class InvalidQuantity(AppException):
+    def __init__(self, message: str = "The quantity must be a positive integer."):
+        super().__init__(
+            code="INVALID_QUANTITY",
+            message=message,
+            status_code=status.HTTP_400_BAD_REQUEST
+        )
+
+class ValidationException(AppException):
+    def __init__(self, message: str = "Validation failed."):
+        super().__init__(
+            code="VALIDATION_ERROR",
+            message=message,
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY
+        )
+
+
 def setup_exception_handlers(app: FastAPI) -> None:
     @app.exception_handler(AppException)
     async def app_exception_handler(request: Request, exc: AppException) -> JSONResponse:

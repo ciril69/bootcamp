@@ -1,2 +1,3 @@
-# Database package placeholder.
-# Database client and sessions (Supabase / SQLAlchemy) will be initialized here in Phase 2.
+from app.db.client import supabase
+
+__all__ = ["supabase"]

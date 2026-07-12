@@ -1,11 +1,9 @@
 from typing import Generator
+from supabase import Client
+from app.db.client import supabase
 
-def get_db() -> Generator[None, None, None]:
+def get_db() -> Generator[Client, None, None]:
     """
-    Placeholder for database dependency (Supabase client/PostgreSQL session).
-    To be fully implemented in later phases.
+    FastAPI dependency that yields the Supabase client instance.
     """
-    try:
-        yield None
-    finally:
-        pass
+    yield supabase
